@@ -16,30 +16,26 @@ public class JosephusSim {
          circle = new PersonNode(file.next());
          size++;
          
-         PersonNode cur = circle;
+         track = circle;
          while(file.hasNext()){
            // add(file);
-           cur.next = new PersonNode(file.next());
-           cur = cur.next;
+           track.next = new PersonNode(file.next());
+           track = track.next;
            size++;
          }
          
          // make the ring circular by attaching last node's next to front
-         cur.next = circle; 
+         track.next = circle; 
          
-         //It doesn't make any sense to me to have the tracker set before we even know what is being eliminated so I moved them
+         // remember the last node as the one in front of the next to get eliminated
+         //I used track to loop through my list so track already is the last node
+         
          // generate, print, and save the random elimination count
          Random random = new Random();
          eliminationCount = random.nextInt(size / 2) + 1;
          System.out.println("Elimination count is " + eliminationCount);
          
-         // remember the last node as the one in front of the next to get eliminated
-         track = circle;
-         for(int i = 1; i <= eliminationCount; i++){
-            track = track.next;
-         }
-         
-      } catch(FileNotFoundException e) {
+         } catch(FileNotFoundException e) {
          System.out.println("Something went wrong with " + fileName);
       }
    }
