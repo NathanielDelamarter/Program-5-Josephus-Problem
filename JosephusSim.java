@@ -49,6 +49,7 @@ public class JosephusSim {
       if(isOver()){
          //do nothing since there is only one person left
       }
+      else{
       // count to the elimination count
       for(int i = 0; i < eliminationCount - 1; i++){
          track = track.next;
@@ -58,7 +59,8 @@ public class JosephusSim {
       // eliminate the person and update "front" of the circle and size
       track.next = track.next.next;
       size--;
-      track = track.next;
+      circle = track.next; // update front
+      }
    }
    
    public boolean isOver() {
@@ -67,9 +69,26 @@ public class JosephusSim {
    }
    
    public String toString() {
+   String str = "Remaining survivors: ";
       // if there's only one person left, print them as the last survivor
+      if(isOver()){
+         str = track.name + " is the last survivor!";
+      }
       // print the remaining survivors (watch out for infinite loop since list is circular)
-      return "";
+      else{
+         int tempNum = 0;
+         PersonNode temp = track;
+         track = circle;
+         for(int i = 1; i <= size - 1; i++){
+            str += i + "-" + track.name + ", ";
+            track = track.next;
+            tempNum = i;
+         }
+         tempNum += 1;
+         str += tempNum + "-" + track.name; 
+         track = temp;
+      }
+      return str;
    }
 
 }
