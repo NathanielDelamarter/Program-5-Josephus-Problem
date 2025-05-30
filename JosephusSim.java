@@ -46,6 +46,9 @@ public class JosephusSim {
    }
    
    public void eliminate() {
+      if(isOver()){
+         //do nothing since there is only one person left
+      }
       // count to the elimination count
       for(int i = 0; i < eliminationCount - 1; i++){
          track = track.next;
@@ -60,7 +63,7 @@ public class JosephusSim {
    
    public boolean isOver() {
       // check if there's only one person left in the circle
-      return false;
+      return size == 1;
    }
    
    public String toString() {
